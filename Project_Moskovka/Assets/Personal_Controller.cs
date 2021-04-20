@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class Personal_Controller : MonoBehaviour
 {
-    float _vertical, _horizontal, _jump;
-    public float _speed = 5, _jumpSpeed = 200;
+    public GameObject _camera;
+
+    Quaternion StartingRotation;
+ 
+    float _vertical, _horizontal, _jump, _rotationVertical, _rotationHorizontal;
+    public float _speed = 5, _jumpSpeed = 100, _cameraSensitivity = 4;
     bool _isGround;
 
     // Start вызывается перед первым обновлением кадра
     void Start()
     {
-        
+        //
+        StartingRotation = transform.rotation;
     }
 
     void OnCollisionStay(Collision other)//если находится на земле
@@ -34,6 +39,21 @@ public class Personal_Controller : MonoBehaviour
     // Update вызывается один раз за кадр
     void Update()
     {
+        _rotationHorizontal += Input.GetAxis("Mouse X") * _cameraSensitivity;
+        _rotationVertical += Input.GetAxis("Mouse Y") * _cameraSensitivity;
+
+        //ограничиваем камеру поворота -60 и 60
+        _rotationVertical = Mathf.Clamp(_rotationVertical, -60, 60);
+
+        //локальные кватернионы
+        Quaternion _rotationY = Quaternion.AngleAxis(_rotationHorizontal, Vector3.up);
+        Quaternion _rotationX = Quaternion.AngleAxis(- _rotationVertical, Vector3.right);
+
+        //
+        _camera.transform.rotation = StartingRotation * _rotationX * transform.rotation;
+        //персонаж идёт вдоль камеры
+        transform.rotation = StartingRotation * _rotationY;
+
         if (_isGround)
         {
             /*получаем данные из класса Input.GetAxis
