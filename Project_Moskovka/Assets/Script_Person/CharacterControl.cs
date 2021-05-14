@@ -10,31 +10,32 @@ public class CharacterControl : MonoBehaviour
     private Vector3 _moveDir = Vector3.zero;
     private CharacterController controller;
 
-    // Start вызывается перед первым обновлением кадра
+    // Start пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     void Start()
     {
-        //получаем компонент из персонажа
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         controller = GetComponent<CharacterController>();
     }
 
-    // FixedUpdate - фиксированнное значение срабатывания функции
+    // FixedUpdate - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     void FixedUpdate()
     {
         if (controller.isGrounded)
         {
-            //присваиваем _moveDir вертикальные и горизонтальные значения с клавиатуры
+            //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ _moveDir пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             _moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             _moveDir = transform.TransformDirection(_moveDir);
             _moveDir *= _speed;
 
-            /*if (Input.GetKeyDown(KeyCode.Z) && controller.isGrounded)
+            //СѓСЃРєРѕСЂРµРЅРёРµ
+            if (Input.GetButton("Shift") && controller.isGrounded)
             {
-                _moveDir *= _speedShift;
+                _speed = 12;
             }
             else
             {
-                
-            }*/
+                _speed = 5;
+            }
         }
         
 
@@ -48,4 +49,14 @@ public class CharacterControl : MonoBehaviour
 
         controller.Move(_moveDir * Time.deltaTime);
     }
+    
+    //СѓР±РёСЂР°С‚СЊ РјРѕРЅРµС‚РєРё
+    private void OnTriggerEnter (Collider other)
+    {
+        if(other.gameObject.tag == "_checkpoint")
+        {
+            Destroy(other.gameObject);
+        }
+    }
+    
 }
