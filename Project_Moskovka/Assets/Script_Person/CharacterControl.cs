@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterControl : MonoBehaviour
 {
     public float _speed = 5, _jumpSpeed = 8, _gravity = 20, _speedShift = 10;
-    bool _isGround;
+    bool isGround;
 
     private Vector3 _moveDir = Vector3.zero;
     private CharacterController controller;
