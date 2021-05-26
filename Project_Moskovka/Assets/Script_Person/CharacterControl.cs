@@ -10,14 +10,14 @@ public class CharacterControl : MonoBehaviour
     private Vector3 _moveDir = Vector3.zero;
     private CharacterController controller;
 
-    // Start ���������� ����� ������ ����������� �����
+    
     void Start()
     {
-        //�������� ��������� �� ���������
+        
         controller = GetComponent<CharacterController>();
     }
 
-    // FixedUpdate - �������������� �������� ������������ �������
+    
     void FixedUpdate()
     {
         if (controller.isGrounded)
@@ -48,15 +48,5 @@ public class CharacterControl : MonoBehaviour
         _moveDir.y -= _gravity * Time.deltaTime;
 
         controller.Move(_moveDir * Time.deltaTime);
-    }
-    
-    //убирать монетки
-    private void OnTriggerEnter (Collider other)
-    {
-        if(other.gameObject.tag == "_checkpoint")
-        {
-            Destroy(other.gameObject);
-        }
-    }
-    
+    }    
 }

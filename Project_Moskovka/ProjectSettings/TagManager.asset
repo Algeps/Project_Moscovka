@@ -6,6 +6,8 @@ TagManager:
   tags:
   - _ground
   - _checkpoint
+  - _sphere
+  - _otherCheckPoint
   layers:
   - Default
   - TransparentFX

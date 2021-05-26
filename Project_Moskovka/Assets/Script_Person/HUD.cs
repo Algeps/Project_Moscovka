@@ -17,12 +17,12 @@ public class HUD : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
     }
 
-    //рисует на экране
+    //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     void OnGUI ()
     {
         GUI.skin.font = versionFont;
