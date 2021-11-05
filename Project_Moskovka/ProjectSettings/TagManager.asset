@@ -8,6 +8,7 @@ TagManager:
   - _checkpoint
   - _sphere
   - _otherCheckPoint
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Player
+  - Ground
   - 
   - 
   - 
