@@ -9,6 +9,7 @@ TagManager:
   - _sphere
   - _otherCheckPoint
   - Ground
+  - Bus
   layers:
   - Default
   - TransparentFX

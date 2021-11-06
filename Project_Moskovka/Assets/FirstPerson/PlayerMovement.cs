@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //анимация персонажа
+    public Animator animator;
+    private int _state = 0;
     //ссылка на колизию персонажа, это будем своего рода "мотор" который перемещает персонажа
     public CharacterController controller;
     //скорость перемещния персонажа
@@ -29,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     void Start() 
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
    
@@ -42,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
             x = Input.GetAxis("Horizontal");
             //W = 1, S = -1
             z = Input.GetAxis("Vertical");
+
             if(Input.GetButtonDown("Jump"))
             {
                 velocity.y = Mathf.Sqrt(JumpHeight * -2f * gravity);
@@ -51,16 +56,18 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("Бегу!");
                 speed = 12f;
+                _state = 2;
             }
-            else if(PlayerWalk(z, x))
+            else if(PlayerWalkForward(z, x))
             {
-                Debug.Log("Иду!");
+                Debug.Log("Иду вперёд!");
                 speed = 5f;
+                _state = 1;
             }
             else if(PlayerStand(z, x))
             {
                 Debug.Log("Стою!");
-                //что-то делает
+                _state = 0;
             }
         }
         //transform.right * x - будем идти влево и право в относительных(не глобальных) координат
@@ -74,9 +81,10 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime * velocityGravity;
         //Присваиваем гравитацию нашему перснажу (так как усорение это секунды в квадрате, то ещё раз умножаем на Time.deltaTime)
         controller.Move(velocity * Time.deltaTime);
+        animator.SetInteger("state", _state);
     }
 
-    bool PlayerWalk(float _z, float _x)
+    bool PlayerWalkForward(float _z, float _x)
     {
         //Debug.Log($"Есть скорость: {_shift},  Есть перемещение: {_z}");
         if(Mathf.Abs(_z) > errorInMovement || Mathf.Abs(_x) > errorInMovement)

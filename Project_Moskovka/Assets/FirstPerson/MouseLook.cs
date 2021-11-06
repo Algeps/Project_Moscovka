@@ -11,6 +11,7 @@ public class MouseLook : MonoBehaviour
     public Transform playerHead;
     //вращение вверх и вниз
     float yRotation = 0f;
+    float yRotationHead = 0f;
     const float turnBodyAfterHead = 40f;
     const float limitYRotation = 70f;
     float mouseX;
@@ -37,6 +38,7 @@ public class MouseLook : MonoBehaviour
         //ограничиваем вращение камеры вверх и вниз на 90 градусов вниз и на 90 градусов вверх
         //следом используем квантернионы для применения самого вращения
         yRotation = Mathf.Clamp(yRotation, -limitYRotation, limitYRotation);
+        yRotationHead = Mathf.Clamp(yRotation, -limitYRotation+15, limitYRotation-60);
     }
 
     void LateUpdate()
@@ -46,7 +48,7 @@ public class MouseLook : MonoBehaviour
         //поворот камеры по Y
         transform.localRotation = Quaternion.Euler(yRotation, 0f, 0f);
         //поворот головы по Y
-        playerHead.localRotation = Quaternion.Euler(yRotation, 0f, 0f);
+        playerHead.localRotation = Quaternion.Euler(yRotationHead, 0f, 0f);
         player.Rotate(Vector3.up, mouseX);
         
     }

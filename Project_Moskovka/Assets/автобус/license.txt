@@ -1,0 +1,11 @@
+Model Information:
+* title:	ПАЗ-3205
+* source:	https://sketchfab.com/3d-models/-3205-e73c8b9cf1d94ab586a88e2771b856a0
+* author:	oldkestas (https://sketchfab.com/oldkestas)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "ПАЗ-3205" (https://sketchfab.com/3d-models/-3205-e73c8b9cf1d94ab586a88e2771b856a0) by oldkestas (https://sketchfab.com/oldkestas) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
