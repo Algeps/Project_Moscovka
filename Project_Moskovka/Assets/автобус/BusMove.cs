@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class BusMove : MonoBehaviour
 {
-    public Vector3 startPosition;
-    public Vector3 endPosition;
-    public float step;
-    float _speed;
+    Rigidbody Bus;
+    float speed = 10;
 
     void Start()
     {
-        transform.position = startPosition;
+        Bus = this.gameObject.GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        transform.position = Vector3.Lerp(startPosition, endPosition, _speed);
-        _speed += 1000;
+        //Bus.velocity = new Vector3(0, 0, speed);
+        Bus.AddForce(0, 0, speed * 5);
     }
 }

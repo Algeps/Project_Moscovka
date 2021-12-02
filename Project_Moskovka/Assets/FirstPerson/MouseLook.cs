@@ -27,7 +27,7 @@ public class MouseLook : MonoBehaviour
     }
 
     //Debug.Log($"По Y: {mouseY}, по X: {mouseX}");
-    void FixedUpdate()
+    void Update()
     {
         //получение ввода мышы и умножение полученный величины на чувствительность мыши
         mouseX = Input.GetAxis("Mouse X") * mouseSensitivityX;
@@ -39,10 +39,8 @@ public class MouseLook : MonoBehaviour
         //следом используем квантернионы для применения самого вращения
         yRotation = Mathf.Clamp(yRotation, -limitYRotation, limitYRotation);
         yRotationHead = Mathf.Clamp(yRotation, -limitYRotation+15, limitYRotation-60);
-    }
 
-    void LateUpdate()
-    {
+
         //Применяем вращение, используя Кватернионы (потому-что они отвечают за вращение в Unity)
         //Добавляем yRotation для X, 0f для Y, 0f для Z
         //поворот камеры по Y
@@ -50,10 +48,11 @@ public class MouseLook : MonoBehaviour
         //поворот головы по Y
         playerHead.localRotation = Quaternion.Euler(yRotationHead, 0f, 0f);
         player.Rotate(Vector3.up, mouseX);
-        
     }
 
-    void Update()
+    void LateUpdate()
     {
+        
+        
     }
 }
